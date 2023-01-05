@@ -45,19 +45,19 @@ def main():
                     sqSelected = (row, col)
                     playerClicks.append(sqSelected)
                 if len(playerClicks) == 2:
-                    move  = ChessEngine.Move(playerClicks[0], playerClicks[1], gs.board)
+                    move = ChessEngine.Move(playerClicks[0], playerClicks[1], gs.board)
                     print(move.getChessNotation())
                     # Only reset moves when a valid move is made
-                    if move in validMoves:
-                        gs.makeMove(move)
-                        moveMade = True
-                        sqSelected = ()
-                        playerClicks = []
+                    for i in range(len(validMoves)):
+                        if move == validMoves[i]:
+                            gs.makeMove(validMoves[i])
+                            moveMade = True
+                            sqSelected = ()
+                            playerClicks = []
                     # If we encounter invalid move, set the next click as the first click
-                    else:
+                    if not moveMade:
                         playerClicks = [sqSelected]
-                    
-            
+                            
             # Key Handlers
             elif e.type == p.KEYDOWN:
                 # Undo Move
